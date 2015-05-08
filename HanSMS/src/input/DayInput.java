@@ -17,7 +17,7 @@ public class DayInput {
             System.out.print("Enter a day: ");
             day = scan.nextLine();
             day = day.toLowerCase();
-            correctDay = day.replaceAll("\\s","");
+            correctDay = day.replaceAll("\\s", "");
             
             if(Arrays.asList(weekdays).contains(correctDay) == false)
                 System.err.println("Invalid day!");

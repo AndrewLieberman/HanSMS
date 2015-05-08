@@ -1,12 +1,12 @@
 package main;
 
 import input.DayInput;
+import input.MealTimeInput;
 
 public class Main {
 
     public static void main(String[] args) {
-        String link;
-
         DayInput.userInput();
+        MealTimeInput.userInput();
     }
 }

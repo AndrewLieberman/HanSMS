@@ -14,12 +14,13 @@ public class FoodInfo {
         Element elm;
         
         try {
-            doc = Jsoup.connect(DayPage.webpage()).get();
-            //For tags:
-            //Element elm = doc.getElementById(DayInput.correctDay);
+            doc = Jsoup.connect("http://www.drexelcampusdining.com/WeeklyMenu.htm").get();
+            
+        
         } catch (IOException ex) {
-            Logger.getLogger(DayPage.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FoodInfo.class.getName()).log(Level.SEVERE, null, ex);
         }
+
 
         return "";
     }

@@ -1,7 +1,6 @@
 package main;
 
 import input.DayInput;
-import parser.DayPage;
 
 public class Main {
 
@@ -9,9 +8,5 @@ public class Main {
         String link;
 
         DayInput.userInput();
-        link = DayPage.webpage();
-
-        System.out.println(link);
     }
 }
- 

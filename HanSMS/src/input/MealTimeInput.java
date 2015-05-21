@@ -23,6 +23,13 @@ public class MealTimeInput {
 
         } while (Arrays.asList(times).contains(correctMealTime) == false);
 
+        if("breakfast".equals(correctMealTime))
+            correctMealTime = "brk";
+        else if("lunch".equals(correctMealTime))
+            correctMealTime = "lun";
+        else 
+            correctMealTime = "din";
+        
         return correctMealTime;
     }
 }

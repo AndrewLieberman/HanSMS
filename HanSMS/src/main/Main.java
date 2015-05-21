@@ -1,14 +1,14 @@
 package main;
 
-import input.DayInput;
 import input.MealTimeInput;
-import parser.FoodInfo;
+import parser.TagCount;
 
 public class Main {
 
     public static void main(String[] args) {
-        //DayInput.userInput();
-        //String mealTime = MealTimeInput.userInput();
-        FoodInfo.food("breakfast"); 
+        String meal;
+        
+        meal = MealTimeInput.userInput();        
+        System.out.println(TagCount.count(meal));
     }
 }

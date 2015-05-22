@@ -1,16 +1,13 @@
 /*
  * TODO
- * The current Hans webpage is not WeeklyMenu.htm.
- * Rather, for example, it is Hans5.18.15.htm for 
- * the week of Monday, May 18, 2015. Later, I can
- * implement a Java library to obtain the current
- * date. Additionally, I would like the tag counter
- * to cease incrementing once it hits the current 
- * day (which can be found in HTML comments). From 
- * there, I can pass the correct menu tag to the
+ * I would like the tag counter to cease 
+ * incrementing once it hits the current day (which 
+ * can be found in HTML comments).
+ * From there, I can pass the correct menu tag to the
  * FoodInfo class, which will read off the info of
- * the respective tag. I will change the TagCount's 
- * return type when necessary.
+ * the respective tag. 
+ * I will change the TagCount's return type when
+ * necessary.
  */
 
 package parser;
@@ -22,6 +19,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import date.CurrentDate;
 
 public class TagCount {
 
@@ -29,9 +27,12 @@ public class TagCount {
         Document doc;
         Elements elm;
         int brkCount = 0, lunCount = 0, dinCount = 0;
+        String link;
 
         try {
-            doc = Jsoup.connect("http://www.drexelcampusdining.com/WeeklyMenu.htm").get();
+            //Menus should start on Mondays, or else we're doomed
+            link = "http://www.drexelcampusdining.com/" + CurrentDate.dateLink();
+            doc = Jsoup.connect(link).get();
             elm = doc.select("tr[class]");
 
             for (Element e : elm) {

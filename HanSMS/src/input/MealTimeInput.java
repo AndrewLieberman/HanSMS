@@ -1,3 +1,12 @@
+/*
+ * Accepts input for the desired meal time.
+ * Matches input to times[] array by first 
+ * neglecting all spaces and setting the string
+ * to lowercase.
+ * Then, meal time is set to its respective
+ * abbreviation.
+ */
+
 package input;
 
 import java.util.Arrays;

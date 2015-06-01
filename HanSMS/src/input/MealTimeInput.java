@@ -7,6 +7,14 @@
  * abbreviation.
  */
 
+/*
+ * TODO
+ * Accept input from the main method, then 
+ * implement repective Twilio libraries in
+ * order to accept user input from a mobile 
+ * device.
+ */
+
 package input;
 
 import java.util.Arrays;
@@ -33,11 +41,11 @@ public class MealTimeInput {
         } while (Arrays.asList(times).contains(correctMealTime) == false);
 
         if("breakfast".equals(correctMealTime))
-            correctMealTime = "brk";
+            correctMealTime = "BREAKFAST";
         else if("lunch".equals(correctMealTime))
-            correctMealTime = "lun";
+            correctMealTime = "LUNCH";
         else 
-            correctMealTime = "din";
+            correctMealTime = "DINNER";
         
         return correctMealTime;
     }

@@ -5,10 +5,12 @@ import input.*;
 
 public class Main {
 
-    public static void main(String[] args) { 
-        String comment;
-        
-        comment = DayComment.comment("monday");
-        FoodInfo.food(comment);
+    public static void main(String[] args) {
+        String dayInput, mealtime;
+
+        dayInput = DayInput.userInput();
+        mealtime = MealTimeInput.userInput();
+
+        FoodInfo.food(dayInput, mealtime);
     }
 }

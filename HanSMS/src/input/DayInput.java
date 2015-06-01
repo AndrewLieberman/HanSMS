@@ -1,3 +1,16 @@
+/*
+ * Accepts user input for their desired day.
+ * This program accepts spelling errors that 
+ * include capitalizaiton and extra spaces.
+ */
+
+/*
+ * TODO
+ * Accept input from the main method, then 
+ * implement repective Twilio libraries in
+ * order to accept user input from a mobile 
+ * device.
+ */
 package input;
 
 import java.util.Arrays;

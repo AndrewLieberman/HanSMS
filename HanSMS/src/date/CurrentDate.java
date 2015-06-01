@@ -9,6 +9,9 @@
  * (i.e., where Monday = 1).
  * Eventually, the week's Hans page is returned 
  * as a string.
+ * Also, there is a special case where Sunday is the 
+ * last day of the month, so it rolls over to the 
+ * first day (i.e., Monday) of the successive month.
  */
 
 package date;
@@ -28,37 +31,41 @@ public class CurrentDate {
         cal = Calendar.getInstance();
         day = date.getDay(); //Between 0 and 6
         calDay = cal.get(Calendar.DATE);
-        calMonth = cal.get(Calendar.MONTH) + 1;
-        calYear = cal.get(Calendar.YEAR) - 2000;
+        calMonth = cal.get(Calendar.MONTH);
+        calYear = cal.get(Calendar.YEAR) % 100;
         
-        switch(day) {
-            case 0:
-                calDay++;
-                break;
-            case 2:
-                calDay--;
-                break;
-            case 3:
-                calDay -= 2;
-                break;
-            case 4:
-                calDay -= 3;
-                break;
-            case 5:
-                calDay -= 4;
-                break;
-            case 6:
-                calDay -= 5;
-                break;  
-            default:
-                break;
+        if(day != 0) { //I.e., if it's not Monday
+            calDay -= day - 1;
+
+            if(calDay > numDayForMonth(calMonth)) {
+                calDay = 0;
+                calMonth++;
+            }
         }
-       
+        
+        calMonth++;
+
         dayConv = Integer.toString(calDay);
         monthConv = Integer.toString(calMonth);
         yearConv = Integer.toString(calYear);
         totalLink = "Hans" + monthConv + "." + dayConv + "." + yearConv + ".htm";
-        
+
         return totalLink;
+    }
+
+    private static int numDayForMonth(int n) {
+        n = (n + 12) % 12; //Avoids month rollover
+
+        switch(n) {
+            case 2:
+                return 28;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                return 30;
+            default:
+                return 31;
+        }
     }
 }

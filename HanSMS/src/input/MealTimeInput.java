@@ -9,8 +9,7 @@
 
 /*
  * TODO
- * Accept input from the main method, then 
- * implement repective Twilio libraries in
+ * Implement repective Twilio libraries in
  * order to accept user input from a mobile 
  * device.
  */
@@ -18,31 +17,26 @@
 package input;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class MealTimeInput {
 
-    public static String mealTime = "";
+    //public static String mealTime = "";
     public static String correctMealTime = "";
     public static String[] times = {"breakfast", "lunch", "dinner"};
 
-    public static String userInput() {
-        Scanner scan = new Scanner(System.in);
+    public static String userInput(String mealTime) {
+        mealTime = mealTime.toLowerCase();
+        correctMealTime = mealTime.replaceAll("\\s", "");
 
-        do {
-            System.out.print("Enter a mealtime: ");
-            mealTime = scan.nextLine();
-            mealTime = mealTime.toLowerCase();
-            correctMealTime = mealTime.replaceAll("\\s", "");
+        if(Arrays.asList(times).contains(correctMealTime) == false) {
+            System.err.println("Invalid mealtime!");
+            System.exit(0);
+        }
+        
 
-            if (Arrays.asList(times).contains(correctMealTime) == false) 
-                System.err.println("Invalid mealtime!");
-
-        } while (Arrays.asList(times).contains(correctMealTime) == false);
-
-        if("breakfast".equals(correctMealTime))
+        if("breakfast".equals(correctMealTime)) 
             correctMealTime = "BREAKFAST";
-        else if("lunch".equals(correctMealTime))
+        else if("lunch".equals(correctMealTime)) 
             correctMealTime = "LUNCH";
         else 
             correctMealTime = "DINNER";

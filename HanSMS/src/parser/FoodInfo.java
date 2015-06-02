@@ -1,4 +1,7 @@
 /* 
+ * The original Hans' page was unfortunately
+ * recently deleted, so an archived version was 
+ * utilized instead and read in as an HTML file.
  * During the element loop, an alternate HTML page 
  * that just shows relevant food info appears.
  * This is due to the webmaster coding in error 
@@ -20,10 +23,14 @@
 
 package parser;
 
-import date.CurrentDate;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import main.Main;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -39,34 +46,49 @@ public class FoodInfo {
         int dayIndexNum, nextDayIndexNum, mealNum, nextMealNum;
         
         //Menus should start on Mondays, or else we're doomed
-        link = "http://www.drexelcampusdining.com/" + CurrentDate.dateLink();
+        //link = "http://www.drexelcampusdining.com/" + CurrentDate.dateLink();
         dayIndex = DayIndex.changer(day);
         nextDayIndex = NextDayIndex.changer(day);
         nextMealTime = NextMealTime.nextMeal(mealtime);
         
+        String totalLink = "";
+
         try {
-            doc = Jsoup.connect(link).get();
-            elms = doc.getAllElements();
-            
-            for(Element e : elms) {
-                output += e.ownText();
-                output += "\n";
+            File file = new File("page.html");
+            Scanner scan = new Scanner(Paths.get("page.html"));
+
+            while (scan.hasNextLine()) {
+                String line = scan.nextLine();
+
+                totalLink += line;
+                totalLink += "\n";
             }
-            
-            dayIndexNum = output.indexOf(dayIndex);
-            nextDayIndexNum = output.indexOf(nextDayIndex);
-            daySubstr = output.substring(dayIndexNum, nextDayIndexNum);
-           
-            mealNum = daySubstr.indexOf(mealtime);
-            nextMealNum = daySubstr.indexOf(nextMealTime);
-            mealSubstr = daySubstr.substring(mealNum, nextMealNum);
-            
-            mealSubstr = mealSubstr.replace("\n\n", "").replace("\r", "");
-            
-            System.out.println(mealSubstr);
-            
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(FoodInfo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
+    
+     
+        doc = Jsoup.parse(totalLink);
+        elms = doc.getAllElements();
+        
+        for(Element e : elms) {
+            output += e.ownText();
+            output += "\n";
+        }
+        
+        dayIndexNum = output.indexOf(dayIndex);
+        nextDayIndexNum = output.indexOf(nextDayIndex);
+        daySubstr = output.substring(dayIndexNum, nextDayIndexNum);
+        
+        mealNum = daySubstr.indexOf(mealtime);
+        nextMealNum = daySubstr.indexOf(nextMealTime);
+        mealSubstr = daySubstr.substring(mealNum, nextMealNum);
+        
+        mealSubstr = mealSubstr.replace("\n\n", "").replace("\r", "");
+        
+        System.out.println(mealSubstr);
     }         
 }

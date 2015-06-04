@@ -38,7 +38,7 @@ import org.jsoup.select.Elements;
 
 public class FoodInfo {
 
-    public static void food(String day, String mealtime) {
+    public static String food(String day, String mealtime) {
         Document doc;
         Elements elms;
         String link, dayIndex, nextDayIndex, nextMealTime, daySubstr, 
@@ -89,6 +89,6 @@ public class FoodInfo {
         
         mealSubstr = mealSubstr.replace("\n\n", "").replace("\r", "");
         
-        System.out.println(mealSubstr);
+        return mealSubstr;
     }         
 }

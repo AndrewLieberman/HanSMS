@@ -1,13 +1,18 @@
 package main;
 
+import com.twilio.sdk.TwilioRestException;
 import java.util.Scanner;
 import parser.*;
 import input.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import sender.*;
 
 public class Main {
 
     public static void main(String[] args) {
-        String totalInput, dayInput, mealInput, dayCorrect, mealCorrect;
+        String totalInput, dayInput, mealInput, dayCorrect, mealCorrect, 
+                food = "";
         String[] parts = null;
         Scanner scan = new Scanner(System.in);
         
@@ -22,8 +27,10 @@ public class Main {
             dayCorrect = DayInput.userInput(dayInput);
             mealCorrect = MealTimeInput.userInput(mealInput);
             
-            FoodInfo.food(dayCorrect, mealCorrect);
+            food = FoodInfo.food(dayCorrect, mealCorrect);
         } else 
             System.err.println("Comma required!");
+        
+        SMSSender.sender(food);
     }
 }

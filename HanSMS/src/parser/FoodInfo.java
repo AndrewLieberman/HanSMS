@@ -69,7 +69,6 @@ public class FoodInfo {
             SMSSender.sender("IOException caught");
         }
     
-     
         doc = Jsoup.parse(totalLink);
         elms = doc.getAllElements();
         

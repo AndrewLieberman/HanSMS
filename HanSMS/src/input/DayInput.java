@@ -13,6 +13,7 @@
 package input;
 
 import java.util.Arrays;
+import twilio.SMSSender;
 
 public class DayInput {
 
@@ -26,7 +27,7 @@ public class DayInput {
         correctDay = day.replaceAll("\\s", "");
 
         if(Arrays.asList(weekdays).contains(correctDay) == false) {
-            System.err.println("Invalid day!");
+            SMSSender.sender("Invalid day!");
             System.exit(0);
         }
         

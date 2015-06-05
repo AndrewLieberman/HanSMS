@@ -17,6 +17,7 @@
 package input;
 
 import java.util.Arrays;
+import twilio.SMSSender;
 
 public class MealTimeInput {
 
@@ -29,7 +30,7 @@ public class MealTimeInput {
         correctMealTime = mealTime.replaceAll("\\s", "");
 
         if(Arrays.asList(times).contains(correctMealTime) == false) {
-            System.err.println("Invalid mealtime!");
+            SMSSender.sender("Invalid meal time!");
             System.exit(0);
         }
         

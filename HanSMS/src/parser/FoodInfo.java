@@ -12,13 +12,9 @@
  * information.
  * Lastly, the user's desired food info is parsed
  * by breaking up the string into substrings.
- */
-
-/*
- * TODO 
- * Implement repective Twilio libraries in
- * order to send requested food info to user's 
- * mobile device.
+ * As a side note, all of the caught exceptions
+ * send a message to the user stating the 
+ * error.
  */
 
 package parser;
@@ -35,6 +31,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import twilio.SMSSender;
 
 public class FoodInfo {
 
@@ -57,7 +54,7 @@ public class FoodInfo {
             File file = new File("page.html");
             Scanner scan = new Scanner(Paths.get("page.html"));
 
-            while (scan.hasNextLine()) {
+            while(scan.hasNextLine()) {
                 String line = scan.nextLine();
 
                 totalLink += line;
@@ -66,8 +63,10 @@ public class FoodInfo {
 
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            SMSSender.sender("FileNotFoundException caught");
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            SMSSender.sender("IOException caught");
         }
     
      
@@ -87,7 +86,10 @@ public class FoodInfo {
         nextMealNum = daySubstr.indexOf(nextMealTime);
         mealSubstr = daySubstr.substring(mealNum, nextMealNum);
         
-        mealSubstr = mealSubstr.replace("\n\n", "").replace("\r", "");
+      
+        mealSubstr = mealSubstr.replace("\n\n\n", "").replace("\r", "");
+        mealSubstr = mealSubstr.replace("\n\n\n\n", "").replace("\r", "");
+        mealSubstr = mealSubstr.replace("\n\n\n\n\n", "").replace("\r", "");
         
         return mealSubstr;
     }         

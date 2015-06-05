@@ -2,6 +2,7 @@
  * Gets the successive mealtime in order to 
  * create a proper substring in FoodInfo
  */
+
 package parser;
 
 public class NextMealTime {

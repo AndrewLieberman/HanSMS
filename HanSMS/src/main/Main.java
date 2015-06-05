@@ -1,12 +1,11 @@
 package main;
 
 import com.twilio.sdk.TwilioRestException;
+import twilio.SMSSender;
 import java.util.Scanner;
 import parser.*;
 import input.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import sender.*;
+import twilio.GetUser;
 
 public class Main {
 
@@ -29,8 +28,9 @@ public class Main {
             
             food = FoodInfo.food(dayCorrect, mealCorrect);
         } else 
-            System.err.println("Comma required!");
+            SMSSender.sender("Comma required!");
         
         SMSSender.sender(food);
+        //GetUser.user();
     }
 }
